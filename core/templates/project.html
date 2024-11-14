@@ -16,9 +16,14 @@
         <div class="project-list">
 
             {% for propriedade in propriedades %}
-                <div class="project-card" onclick="showTasks('{{ propriedade.matricula }}', '{{ propriedade.nome }}', '{{ propriedade.area }}', '{{ propriedade.ccir }}')">
+                <div class="project-card" onclick="showTasks('{{ propriedade.matricula }}', '{{ propriedade.nome }}', '{{ propriedade.area }}', '{{ propriedade.municipio }}', '{{ propriedade.ccir }}')">
                     <h2>{{ propriedade.nome }}</h2>
                     <p>{{ propriedade.matricula }}</p>
+                    {% for i in proprietarios %}
+                        {% if i.propriedade_id == propriedade.id %}
+                            <h1>i.nome</h1>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             {% endfor %}
             
@@ -26,17 +31,32 @@
             <button class="new-project-btn">+ Adicionar Propriedade</button>
         </div>
 
-        <!-- Tabela de Tarefas -->
-        <div class="task-table-container" id="task-table-container">
-            <ul class="responsive-table">
-                <li class="table-header">
-                    <div class="col col-1">Matrícula</div>
-                    <div class="col col-2">Nome</div>
-                    <div class="col col-3">Área</div>
-                    <div class="col col-4">CCIR</div>
-                </li>
-            </ul>
-            <ul class="responsive-table" id="task-table-body"></ul>
+        <!-- Tabela de Dados da Propriedade -->
+        <div class="property-container">
+            <div class="property-table-container" id="property-table-container">
+                <ul class="responsive-table">
+                    <li class="table-header">
+                        <div class="col col-1">Matrícula</div>
+                        <div class="col col-2">Nome</div>
+                        <div class="col col-3">Área</div>
+                        <div class="col col-4">Município</div>
+                        <div class="col col-5">CCIR</div>
+                    </li>
+                </ul>
+                <ul class="responsive-table" id="property-table-body"></ul>
+            </div>
+
+            <div class="owner-table-container" id="owner-table-container">
+                <ul class="responsive-table">
+                    <li class="table-header">
+                        <div class="col col-7">Tipo</div>
+                        <div class="col col-8">CPF/CNPJ</div>
+                        <div class="col col-9">Nome</div>
+                        <div class="col col-10">Município</div>
+                    </li>
+                </ul>
+                <ul class="responsive-table" id="owner-table-body"></ul>
+            </div>
         </div>
 
         <!-- Gráficos de Estatísticas -->
@@ -50,9 +70,9 @@
 
     <script>
 
-        function showTasks(matricula, nome,area, ccir) {
-            const taskTableContainer = document.getElementById('task-table-container');
-            const taskTableBody = document.getElementById('task-table-body');
+        function showTasks(matricula, nome,area, municipio, ccir) {
+            const taskTableContainer = document.getElementById('property-table-container');
+            const taskTableBody = document.getElementById('property-table-body');
             const totalTasksChart = document.getElementById('total-tasks-chart');
             const completedTasksChart = document.getElementById('completed-tasks-chart');
             const pendingTasksChart = document.getElementById('pending-tasks-chart');
@@ -62,10 +82,11 @@
             const row = document.createElement('li');
             row.classList.add('table-row');
             row.innerHTML = `
-                <div class="col col-1" data-label="Nome">${matricula}</div>
-                <div class="col col-2" data-label="Descrição">${nome}</div>
-                <div class="col col-3" data-label="Status">${area}</div>
-                <div class="col col-4" data-label="Prazo">${ccir}</div>
+                <div class="col col-1">${matricula}</div>
+                <div class="col col-2">${nome}</div>
+                <div class="col col-3">${area}</div>
+                <div class="col col-4">${municipio}</div>
+                <div class="col col-5">${ccir}</div>
             `;
             taskTableBody.appendChild(row);
 

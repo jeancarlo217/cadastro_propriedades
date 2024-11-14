@@ -5,7 +5,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, DeleteView
 
-from  .models import Propriedade
+from .models import Propriedade, ProprietarioPropriedade, Proprietario
 
 
 class LoginView(LoginView):
@@ -28,5 +28,7 @@ class ProjectView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ProjectView, self).get_context_data(**kwargs)
+        propriedade = kwargs.get('proprietario_id')
         context['propriedades'] = Propriedade.objects.all()
+        context['proprietarios'] = ProprietarioPropriedade.objects.filter(propriedade=propriedade)
         return context
