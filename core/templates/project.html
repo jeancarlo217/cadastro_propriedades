@@ -21,7 +21,7 @@
                     <p>{{ propriedade.matricula }}</p>
                     {% for i in proprietarios %}
                         {% if i.propriedade_id == propriedade.id %}
-                            <h1>i.nome</h1>
+                            <h1>{{ i.proprietario.id }}</h1>
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -98,6 +98,10 @@
             pendingTasksChart.innerText = `Percentual Não Finalizado: ${pendingPercentage}%`;
 
             taskTableContainer.style.display = 'block';
+        }
+    
+        function showOwners() {
+            
         }
     </script>
 </div>

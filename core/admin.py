@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import User, Propriedade, Municipio
+from .models import User, Propriedade, Municipio, Proprietario, ProprietarioPropriedade, CNPJ, Titular
 
 @admin.register(User)
 class CustomUserAdmin(BaseUserAdmin):
@@ -32,4 +32,24 @@ class PropriedadeAdmin(admin.ModelAdmin):
 
 @admin.register(Municipio)
 class MunicipioAdmin(admin.ModelAdmin):
+    list_display = ()
+
+
+@admin.register(Proprietario)
+class ProprietarioAdmin(admin.ModelAdmin):
+    list_display = ()
+
+
+@admin.register(ProprietarioPropriedade)
+class ProprietarioPropriedadeAdmin(admin.ModelAdmin):
+    list_display = ()
+
+
+@admin.register(CNPJ)
+class CNPJAdmin(admin.ModelAdmin):
+    list_display = ()
+
+
+@admin.register(Titular)
+class TitularAdmin(admin.ModelAdmin):
     list_display = ()

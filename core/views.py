@@ -28,7 +28,6 @@ class ProjectView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ProjectView, self).get_context_data(**kwargs)
-        propriedade = kwargs.get('proprietario_id')
         context['propriedades'] = Propriedade.objects.all()
-        context['proprietarios'] = ProprietarioPropriedade.objects.filter(propriedade=propriedade)
+        context['proprietarios'] = ProprietarioPropriedade.objects.all()
         return context
