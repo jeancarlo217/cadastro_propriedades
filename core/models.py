@@ -94,7 +94,6 @@ class Titular(models.Model):
     def __str__(self):
         return self.nome
 
-
 class CNPJ(models.Model):
     cnpj = models.CharField(max_length=14, unique=True)
     telefone = models.CharField(max_length=20, blank=True, null=True)
